@@ -4,23 +4,31 @@ import re
 DB = None
 CONN = None
 
+#TODO: handle when no data is returned for the below get_ functions
+
 #given a github acct, print corresponding student name
 def get_student_by_github(github):
     query = """SELECT first_name, last_name, github 
                 FROM Students WHERE github = ?"""
     DB.execute(query, (github,))
     row = DB.fetchone()
-    print """Student: %s %s 
-    Github account: %s"""%(row[0], row[1], row[2])
+    if row:
+        print """\tStudent: %s %s 
+        Github account: %s"""%(row[0], row[1], row[2])
+    else:
+        print "There isn't a student for that github."
 
 
 def get_project_by_title(title):
     query = """SELECT * FROM Projects WHERE title=?"""
     DB.execute(query, (title,))
     row = DB.fetchone()
-    print """Title: %s
-    Description: %s
-    Max Score: %s""" % (row[0], row[1], row[2])
+    if row:
+        print """\tTitle: %s
+        Description: %s
+        Max Score: %s""" % (row[0], row[1], row[2])
+    else:
+        print "There isn't a project with that title."
 
 def make_new_student(first, last, github):
     query = """INSERT into Students values (?,?,?)"""
@@ -83,15 +91,15 @@ def split_into_command_and_args(text):
         args = tokens[1:]
 
     # deal with splitting on quote marks if used
-    # TODO: the below code is gross...there must be a more elegant way?
-    print "args starts as:",args
+    # TODO: the below code is gross...there must be a more elegant way? look for a library to handle?
+
     if re.search("[\"]", text):
         s = " ".join(args)
         args = s.split("\"")
-        print "splitting on quotes, args is now:", args
+
         i=0
         while i < len(args):
-            print "Word is:", args[i]
+
             if args[i] == "":
                 args.pop(i)
             else:
@@ -103,6 +111,22 @@ def split_into_command_and_args(text):
 
     return (command, args)
 
+def print_help_info():
+    print "Available commands are:"
+    print "Get a student's info: student <github name>"
+    print "Add a new student: new_student <first> <last> <github>"
+    print "Get project info: project <project name>"
+    print "Add a new project: new_project <name> <description> <maxscore>"
+    print "Give a new grade: give_grade <github> <project name> <grade>"
+    print "Get grades by name: get_grades_by_name <first> <last>"
+    print "Get grades by github: get_grades_by_github <github>"
+    print "Get all grades for a project: get_grades_for_project <project name>"
+
+def check_args_len(args,n):
+    if len(args) == n:
+        return True
+    print "Ooops! You gave %s arguments, but needed %s arguments." % (len(args),n)
+    return False
 
 def main():
     connect_to_db()
@@ -112,24 +136,27 @@ def main():
         
         command, args = split_into_command_and_args(input_string)
 
-        if command == "student":
-            get_student_by_github(*args) 
-        elif command == "new_student":
-            make_new_student(*args)
-        elif command == "project":
-            get_project_by_title(" ".join(args))
-        elif command == "give_grade":
+
+        if command == "student" and check_args_len(args,1):
+                get_student_by_github(*args) 
+        elif command == "new_student" and check_args_len(args,3):
+                make_new_student(*args)
+        elif command == "project" and check_args_len(args,1):
+                get_project_by_title(*args)
+        elif command == "give_grade" and check_args_len(args,3):
             give_grade_to_student(*args)
-        elif command == "get_grades_for_project":
-            get_all_grades_for_project(" ".join(args))
-        elif command == "get_grades_by_github":
+        elif command == "get_grades_for_project" and check_args_len(args,1):
+            get_all_grades_for_project(*args)
+        elif command == "get_grades_by_github" and check_args_len(args,1):
             get_grades_by_github(*args)
-        elif command == "get_grades_by_name":
+        elif command == "get_grades_by_name" and check_args_len(args,2):
             get_grades_by_name(*args)
-        elif command == "new_project":
-            make_new_project(args[0], " ".join(args[1:-1]),int(args[-1]))
+        elif command == "new_project" and check_args_len(args,3):
+            make_new_project(*args)
+        elif command == "help":
+            print_help_info()
         else:
-            print "Derp, I don't know what that means. Try again!"
+            print "Oops, you did it wrong. Try again! Type help to see your options."
 
     CONN.close()
 
