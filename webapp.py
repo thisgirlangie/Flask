@@ -24,5 +24,19 @@ def get_students_and_grades_for_project():
     html = render_template("students_and_grades.html", project=project, grades=rows)
     return html
 
+@app.route("/student_add")
+def display_add_student_form():
+    html = render_template("student_add.html")
+    return html
+
+@app.route("/student_add_create")
+def add_student():
+    hackbright_app.connect_to_db()
+    first = request.args.get("first")
+    last = request.args.get("last")
+    github = request.args.get("github")
+    row = hackbright_app.make_new_student(first, last, github)
+    return "You have successfully added a student to the database!"
+
 if __name__ == "__main__":
     app.run(debug=True)

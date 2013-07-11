@@ -27,9 +27,8 @@ def get_project_by_title(title):
 def make_new_student(first, last, github):
     query = """INSERT into Students values (?,?,?)"""
     DB.execute(query, (first, last, github))
-
     CONN.commit()
-    print "Successfully added student: %s %s" % (first, last)
+    return "Successfully added student %s %s at Github ID %s" % (first, last, github)
 
 def make_new_project(title, descrip, max_grade):
     query = """INSERT into Projects values (?,?,?)"""
