@@ -47,9 +47,10 @@ def get_all_grades_for_project(title):
     query = """SELECT first_name, last_name, grade from GradesView WHERE project_title=?"""
     DB.execute(query, (title,))
     rows = DB.fetchall()
-    print """Project: %s""" % title
-    for r in rows:
-        print """Name: %s %s   Grade: %s""" % (r[0], r[1], r[2])
+#    print """Project: %s""" % title
+#    for r in rows:
+#        print """Name: %s %s   Grade: %s""" % (r[0], r[1], r[2])
+    return rows
 
 def get_grades_by_github(github):
     query = """SELECT project_title, grade from Grades WHERE student_github=?"""

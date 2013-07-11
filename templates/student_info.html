@@ -2,11 +2,13 @@
 <body>
 <!-- <h1>Student: {{first_name}} {{last_name}}</h1> -->
 <h2>Github account: {{github}}</h2>
-<ul>
+
 {% for grade in grades %}
-  <li>Project: {{ grade[0] }}<br/>Grade: {{ grade[1] }}</a></li>
+Project: <a href="/students_and_grades?project={{ grade[0] }}">{{ grade[0] }}</a><br/>
+Grade: {{ grade[1] }}</a><br/><br/>
 {% endfor %}
-</ul>
-<p> This student has shown potential and grit. Hard work pays off!</p>
+
+<h2>Bottom line:</h2> 
+<p>This student has shown potential and grit. Hard work pays off!</p>
 </body>
 </html>
