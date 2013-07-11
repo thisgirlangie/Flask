@@ -8,16 +8,10 @@ CONN = None
 
 #given a github acct, print corresponding student name
 def get_student_by_github(github):
-    query = """SELECT first_name, last_name, github 
-                FROM Students WHERE github = ?"""
+    query = """SELECT first_name, last_name, github FROM Students WHERE github = ?"""
     DB.execute(query, (github,))
     row = DB.fetchone()
-    if row:
-        print """\tStudent: %s %s 
-        Github account: %s"""%(row[0], row[1], row[2])
-    else:
-        print "There isn't a student for that github."
-
+    return row
 
 def get_project_by_title(title):
     query = """SELECT * FROM Projects WHERE title=?"""
@@ -61,10 +55,9 @@ def get_grades_by_github(github):
     query = """SELECT project_title, grade from Grades WHERE student_github=?"""
     DB.execute(query, (github,))
     rows = DB.fetchall()
-    print """\
-    Github: %s""" % github
-    for r in rows:
-        print """Project: %s  Grade: %s""" % (r[0], r[1])
+    #for r in rows:
+    #    print """Project: %s  Grade: %s""" % (r[0], r[1])
+    return rows
 
 def get_grades_by_name(first, last):
     query = """SELECT title, grade, max_grade 
