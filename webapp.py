@@ -38,5 +38,20 @@ def add_student():
     row = hackbright_app.make_new_student(first, last, github)
     return "You have successfully added a student to the database!"
 
+
+@app.route("/project_add")
+def display_add_project_form():
+    html = render_template("project_add.html")
+    return html
+
+@app.route("/project_add_create")
+def add_project():
+    hackbright_app.connect_to_db()
+    project = request.args.get("project")
+    project_desc = request.args.get("project_desc")
+    max_grade = request.args.get("max_grade")
+    row = hackbright_app.make_new_project(project, project_desc, max_grade)
+    return "You have successfully added a project to the database!"
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -34,7 +34,7 @@ def make_new_project(title, descrip, max_grade):
     query = """INSERT into Projects values (?,?,?)"""
     DB.execute(query, (title, descrip, max_grade))
     CONN.commit()
-    print "Successfully added project: %s" % title
+    return "Successfully added project: %s" % title
 
 def give_grade_to_student(github, project, grade):
     query = """INSERT into Grades values (?,?,?)"""
