@@ -44,7 +44,7 @@ def give_grade_to_student(github, project, grade):
     print "Successfully gave %s a grade of %s for project %s" % (github, grade, project)
 
 def get_all_grades_for_project(title):
-    query = """SELECT first_name, last_name, grade, github from GradesView JOIN Students on first_name WHERE project_title=?""" # this is wrong, testing Julyathon webhook in Github via commit
+    query = """SELECT first_name, last_name, grade, github from GradesView JOIN Students on first_name WHERE project_title=?""" # this is wrong, just testing Julyathon webhook in Github via commit
     DB.execute(query, (title,))
     rows = DB.fetchall()
 #    print """Project: %s""" % title
