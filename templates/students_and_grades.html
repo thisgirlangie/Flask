@@ -6,8 +6,8 @@
 <h2>Project: {{project}}</h2>
 
 {% for grade in grades %}
-Student: {{ grade[0] }} {{ grade[1] }}<br/>
-Grade: {{ grade[2] }}</a><br/><br/>
+Student: <a href="/student?github={{ grade [6] }}">{{ grade[0] }} {{ grade[1] }}</a><br/>
+Grade: {{ grade[3] }}</a><br/><br/>
 {% endfor %}
 
 <h2>Bottom line:</h2> 
