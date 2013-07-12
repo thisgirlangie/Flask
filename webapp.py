@@ -38,7 +38,8 @@ def add_student():
     last = request.args.get("last")
     github = request.args.get("github")
     row = hackbright_app.make_new_student(first, last, github)
-    return "You have successfully added a student to the database!"
+    html = render_template("student_added.html")
+    return html
 
 # ADD PROJECT
 @app.route("/project_add")
@@ -53,7 +54,8 @@ def add_project():
     project_desc = request.args.get("project_desc")
     max_grade = request.args.get("max_grade")
     row = hackbright_app.make_new_project(project, project_desc, max_grade)
-    return "You have successfully added a project to the database!"
+    html = render_template("project_added.html")
+    return html
 
 # ADD GRADE
 @app.route("/grade_add")
@@ -68,7 +70,8 @@ def add_grade():
     project = request.args.get("project")
     grade = request.args.get("grade")
     row = hackbright_app.give_grade_to_student(github, project, grade)
-    return "You have successfully graded a student!"
+    html = render_template("grade_added.html")
+    return html
 
 if __name__ == "__main__":
     app.run(debug=True)
