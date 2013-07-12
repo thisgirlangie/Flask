@@ -4,6 +4,7 @@ import hackbright_app
 
 app = Flask(__name__)
 
+# FRONTPAGE
 @app.route("/")
 def get_github():
     return render_template("get_github.html")
@@ -24,6 +25,7 @@ def get_students_and_grades_for_project():
     html = render_template("students_and_grades.html", project=project, grades=rows)
     return html
 
+# ADD STUDENT
 @app.route("/student_add")
 def display_add_student_form():
     html = render_template("student_add.html")
@@ -38,7 +40,7 @@ def add_student():
     row = hackbright_app.make_new_student(first, last, github)
     return "You have successfully added a student to the database!"
 
-
+# ADD PROJECT
 @app.route("/project_add")
 def display_add_project_form():
     html = render_template("project_add.html")
@@ -52,6 +54,21 @@ def add_project():
     max_grade = request.args.get("max_grade")
     row = hackbright_app.make_new_project(project, project_desc, max_grade)
     return "You have successfully added a project to the database!"
+
+# ADD GRADE
+@app.route("/grade_add")
+def display_add_grade_form():
+    html = render_template("grade_add.html")
+    return html
+
+@app.route("/grade_add_create")
+def add_grade():
+    hackbright_app.connect_to_db()
+    github = request.args.get("github")
+    project = request.args.get("project")
+    grade = request.args.get("grade")
+    row = hackbright_app.give_grade_to_student(github, project, grade)
+    return "You have successfully graded a student!"
 
 if __name__ == "__main__":
     app.run(debug=True)

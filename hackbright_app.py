@@ -40,7 +40,7 @@ def give_grade_to_student(github, project, grade):
     query = """INSERT into Grades values (?,?,?)"""
     DB.execute(query, (github, project, grade))
     CONN.commit()
-    print "Successfully gave %s a grade of %s for project %s" % (github, grade, project)
+    return "Successfully gave %s a grade of %s for project %s" % (github, grade, project)
 
 def get_all_grades_for_project(project):
     query = """SELECT * FROM GradesView JOIN Students on GradesView.first_name=Students.first_name WHERE GradesView.last_name=Students.last_name and project_title=?"""
