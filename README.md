@@ -2,8 +2,11 @@
 Angie's notes: https://gist.github.com/thisgirlangie/5968943
 ============================================================ 
 
+How to build a Flask app: 
+https://github.com/chriszf/sql_lesson/blob/master/WEB.md
+
+===========================
 SQL and Relational Databases
-============================
 We'll be building a database that stores a list of students and their student projects. There are many ways we can do this, but by 'modeling' our data appropriately, it becomes easier to manipulate. The difficulty in using SQL and databases comes not from accessing the data, but from modeling the data in a way that is easy to access.
 
 Start by cloning this repository, then go into the project directory and type the following at your prompt:
