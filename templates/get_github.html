@@ -1,8 +1,11 @@
 <html>
+
 <body>
 
-	<img src="https://github.com/thisgirlangie/Flask/blob/master/templates/cat-google.jpg?raw=true"><br><br>
-	<h1>Access the Student Database</h1>
+    <div style="width:500px; margin:0 auto;"><br><br>
+	<h1>Flasky Database!</h1>
+	<img src="https://github.com/thisgirlangie/Flask/blob/master/templates/cat-google.jpg?raw=true" style="width:350px;"><br><br>
+	<h1 style="display:none;">Access that Student Database!</h1>
 	<form action="/student">
 		<label for="github">To view projects and grades, enter student's Github handle: </label><br><br>
 		<input type="text" name="github" /> <!-- See here, the "name" attribute is the key for the key/value pair -->
@@ -10,11 +13,17 @@
 	</form>
 
 <br/>
-<h1>Or, Do More Stuff to the Database</h1>
+<h1>Or, Do More Stuff to the Database!</h1>
 <ul>
 	<li><a href="/student_add">Add a Student</a></li>
 	<li><a href="/project_add">Add a Project</a></li>
 	<li><a href="/grade_add">Add a Grade</a></li>
 </ul>
+
+<img src="/static/adding_trash.jpg" style="width:500px;">
+<br><br>
+
+</div>
+
 </body>
 </html>
