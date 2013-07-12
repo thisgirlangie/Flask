@@ -1,3 +1,7 @@
+============================================================ 
+Angie's notes: https://gist.github.com/thisgirlangie/5968943
+============================================================ 
+
 SQL and Relational Databases
 ============================
 We'll be building a database that stores a list of students and their student projects. There are many ways we can do this, but by 'modeling' our data appropriately, it becomes easier to manipulate. The difficulty in using SQL and databases comes not from accessing the data, but from modeling the data in a way that is easy to access.
